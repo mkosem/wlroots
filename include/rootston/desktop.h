@@ -4,6 +4,7 @@
 #include <wayland-server.h>
 #include <wlr/config.h>
 #include <wlr/types/wlr_compositor.h>
+#include <wlr/types/wlr_drm_lease_v1.h>
 #include <wlr/types/wlr_foreign_toplevel_management_v1.h>
 #include <wlr/types/wlr_gamma_control_v1.h>
 #include <wlr/types/wlr_gtk_primary_selection.h>
@@ -43,28 +44,29 @@ struct roots_desktop {
 	struct wlr_xcursor_manager *xcursor_manager;
 
 	struct wlr_compositor *compositor;
-	struct wlr_xdg_shell_v6 *xdg_shell_v6;
-	struct wlr_xdg_shell *xdg_shell;
-	struct wlr_gamma_control_manager_v1 *gamma_control_manager_v1;
+	struct wlr_drm_lease_manager_v1 *drm_lease_manager;
 	struct wlr_export_dmabuf_manager_v1 *export_dmabuf_manager_v1;
-	struct wlr_server_decoration_manager *server_decoration_manager;
-	struct wlr_xdg_decoration_manager_v1 *xdg_decoration_manager;
+	struct wlr_foreign_toplevel_manager_v1 *foreign_toplevel_manager_v1;
+	struct wlr_gamma_control_manager_v1 *gamma_control_manager_v1;
 	struct wlr_gtk_primary_selection_device_manager *primary_selection_device_manager;
 	struct wlr_idle *idle;
 	struct wlr_idle_inhibit_manager_v1 *idle_inhibit;
 	struct wlr_input_inhibit_manager *input_inhibit;
-	struct wlr_layer_shell_v1 *layer_shell;
 	struct wlr_input_method_manager_v2 *input_method;
+	struct wlr_layer_shell_v1 *layer_shell;
+	struct wlr_output_manager_v1 *output_manager_v1;
+	struct wlr_pointer_constraints_v1 *pointer_constraints;
+	struct wlr_pointer_gestures_v1 *pointer_gestures;
+	struct wlr_presentation *presentation;
+	struct wlr_relative_pointer_manager_v1 *relative_pointer_manager;
+	struct wlr_screencopy_manager_v1 *screencopy;
+	struct wlr_server_decoration_manager *server_decoration_manager;
+	struct wlr_tablet_manager_v2 *tablet_v2;
 	struct wlr_text_input_manager_v3 *text_input;
 	struct wlr_virtual_keyboard_manager_v1 *virtual_keyboard;
-	struct wlr_screencopy_manager_v1 *screencopy;
-	struct wlr_tablet_manager_v2 *tablet_v2;
-	struct wlr_pointer_constraints_v1 *pointer_constraints;
-	struct wlr_presentation *presentation;
-	struct wlr_foreign_toplevel_manager_v1 *foreign_toplevel_manager_v1;
-	struct wlr_relative_pointer_manager_v1 *relative_pointer_manager;
-	struct wlr_pointer_gestures_v1 *pointer_gestures;
-	struct wlr_output_manager_v1 *output_manager_v1;
+	struct wlr_xdg_decoration_manager_v1 *xdg_decoration_manager;
+	struct wlr_xdg_shell *xdg_shell;
+	struct wlr_xdg_shell_v6 *xdg_shell_v6;
 
 	struct wl_listener new_output;
 	struct wl_listener layout_change;
@@ -78,6 +80,7 @@ struct roots_desktop {
 	struct wl_listener pointer_constraint;
 	struct wl_listener output_manager_apply;
 	struct wl_listener output_manager_test;
+	struct wl_listener drm_lease_requested;
 
 #if WLR_HAS_XWAYLAND
 	struct wlr_xwayland *xwayland;

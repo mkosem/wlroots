@@ -24,6 +24,7 @@ struct roots_output_config {
 		int width, height;
 		float refresh_rate;
 	} mode;
+	bool lease;
 	struct wl_list modes;
 };
 

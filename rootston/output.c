@@ -609,6 +609,13 @@ void handle_new_output(struct wl_listener *listener, void *data) {
 		wlr_output->model, wlr_output->serial, wlr_output->phys_width,
 		wlr_output->phys_height);
 
+	if (wlr_output->non_desktop) {
+		if (desktop->drm_lease_manager && wlr_output_is_drm(wlr_output)) {
+			wlr_drm_lease_manager_v1_offer_output(
+					desktop->drm_lease_manager, wlr_output);
+		}
+	}
+
 	struct roots_output *output = calloc(1, sizeof(struct roots_output));
 	clock_gettime(CLOCK_MONOTONIC, &output->last_frame);
 	output->desktop = desktop;
@@ -645,6 +652,11 @@ void handle_new_output(struct wl_listener *listener, void *data) {
 	struct wlr_output_mode *preferred_mode =
 		wlr_output_preferred_mode(wlr_output);
 	if (output_config) {
+		if (output_config->lease && desktop->drm_lease_manager
+				&& wlr_output_is_drm(wlr_output)) {
+			wlr_drm_lease_manager_v1_offer_output(
+					desktop->drm_lease_manager, wlr_output);
+		}
 		if (output_config->enable) {
 			if (wlr_output_is_drm(wlr_output)) {
 				struct roots_output_mode_config *mode_config;

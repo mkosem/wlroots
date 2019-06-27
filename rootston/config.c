@@ -412,6 +412,8 @@ static int config_ini_handler(void *user, const char *section, const char *name,
 				free(mode);
 				wlr_log(WLR_ERROR, "Invalid modeline: %s", value);
 			}
+		} else if (strcmp(name, "lease") == 0) {
+			oc->lease = strcmp(value, "yes") == 0;
 		}
 	} else if (strncmp(cursor_prefix, section, strlen(cursor_prefix)) == 0) {
 		const char *seat_name = section + strlen(cursor_prefix);

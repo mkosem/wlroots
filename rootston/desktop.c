@@ -279,6 +279,14 @@ static void handle_pointer_constraint(struct wl_listener *listener,
 	}
 }
 
+static void handle_drm_lease_requested(
+		struct wl_listener *listener, void *data) {
+	struct wlr_drm_lease_request_v1 *req = data;
+	// We only offer leases we're prepared to grant
+	// Other compositors might want to e.g. show a prompt
+	wlr_drm_lease_manager_v1_grant_lease_request(req->manager, req);
+}
+
 struct roots_desktop *desktop_create(struct roots_server *server,
 		struct roots_config *config) {
 	wlr_log(WLR_DEBUG, "Initializing roots desktop");
@@ -445,6 +453,14 @@ struct roots_desktop *desktop_create(struct roots_server *server,
 
 	wlr_primary_selection_v1_device_manager_create(server->wl_display);
 	wlr_data_control_manager_v1_create(server->wl_display);
+
+	desktop->drm_lease_manager = wlr_drm_lease_manager_v1_create(
+			server->wl_display, server->backend);
+	if (desktop->drm_lease_manager != NULL) {
+		desktop->drm_lease_requested.notify = handle_drm_lease_requested;
+		wl_signal_add(&desktop->drm_lease_manager->events.lease_requested,
+				&desktop->drm_lease_requested);
+	}
 
 	return desktop;
 }
