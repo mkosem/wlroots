@@ -101,10 +101,6 @@ examples = {
 		'src': 'toplevel-decoration.c',
 		'dep': [wayland_client, wlr_protos, wlroots],
 	},
-	'input-method': {
-		'src': 'input-method.c',
-		'dep': [wayland_client, wlr_protos] + libepoll,
-	},
 	'text-input': {
 		'src': 'text-input.c',
 		'dep': [wayland_cursor, wayland_client, wlr_protos, wlroots],
