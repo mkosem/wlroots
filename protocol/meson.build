@@ -34,7 +34,6 @@ protocols = [
 	'wlr-gamma-control-unstable-v1.xml',
 	'wlr-input-inhibitor-unstable-v1.xml',
 	'wlr-layer-shell-unstable-v1.xml',
-	'wlr-output-management-unstable-v1.xml',
 	'wlr-screencopy-unstable-v1.xml',
 ]
 
