@@ -49,7 +49,6 @@ client_protocols = [
 	[wl_protocol_dir, 'unstable/xdg-shell/xdg-shell-unstable-v6.xml'],
 	'idle.xml',
 	'input-method-unstable-v2.xml',
-	'screenshooter.xml',
 	'wlr-export-dmabuf-unstable-v1.xml',
 	'wlr-foreign-toplevel-management-unstable-v1.xml',
 	'wlr-gamma-control-unstable-v1.xml',
