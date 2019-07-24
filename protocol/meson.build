@@ -25,11 +25,6 @@ protocols = [
 	[wl_protocol_dir, 'unstable/xdg-shell/xdg-shell-unstable-v6.xml'],
 	'gtk-primary-selection.xml',
 	'idle.xml',
-<<<<<<< HEAD
-	'input-method-unstable-v2.xml',
-=======
-	'screenshooter.xml',
->>>>>>> parent of cec74711... wlroots: add basic support for zwp_input_method_v2
 	'server-decoration.xml',
 	'text-input-unstable-v3.xml',
 	'virtual-keyboard-unstable-v1.xml',
