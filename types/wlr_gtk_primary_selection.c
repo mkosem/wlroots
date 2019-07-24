@@ -361,7 +361,7 @@ static void device_destroy(struct wlr_gtk_primary_selection_device *device) {
 static const struct gtk_primary_selection_device_manager_interface
 	device_manager_impl;
 
-static struct wlr_gtk_primary_selection_device_manager *manager_from_resource(
+struct wlr_gtk_primary_selection_device_manager *manager_from_resource(
 		struct wl_resource *resource) {
 	assert(wl_resource_instance_of(resource,
 		&gtk_primary_selection_device_manager_interface, &device_manager_impl));
@@ -390,7 +390,7 @@ static void device_manager_handle_create_source(struct wl_client *client,
 		source_resource_handle_destroy);
 }
 
-static void device_manager_handle_get_device(struct wl_client *client,
+void device_manager_handle_get_device(struct wl_client *client,
 		struct wl_resource *manager_resource, uint32_t id,
 		struct wl_resource *seat_resource) {
 	struct wlr_seat_client *seat_client =
